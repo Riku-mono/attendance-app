@@ -6,6 +6,9 @@ import { cn } from '@/lib/utils'
 import { SessionProvider } from 'next-auth/react'
 import { auth } from '@/auth'
 
+import { ThemeProvider } from '@/components/theme-provider'
+import { ModeToggle } from '@/components/theme-toggle-btn'
+
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -25,7 +28,16 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   )
