@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("LOCAL_DATABASE_URL")
+}
+ 
+model User {
+  id               String       @id @default(cuid())
+  name             String?
+  email            String       @unique
+  emailVerified    DateTime?
+  image            String?
+  role             String       @default("USER")
+  profileInitialed Boolean?     @default(false)
+  profile          Profile?
+  rooms            Room[]
+  attendances      Attendance[]
+  accounts         Account[]
+  sessions         Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
+}
+
+// 以下はアプリケーションのスキーマ
+// User と Profile 1対1の関係
+model Profile {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  firstName String?
+  lastName  String?
+  campusId  Int?
+  language  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  campus Campus? @relation(fields: [campusId], references: [id])
+  user   User    @relation(fields: [userId], references: [id])
+}
+
+// Profile と Campus 多対1の関係
+model Campus {
+  id       Int   @id @default(autoincrement())
+  name     String @unique
+  color    String
+  profiles Profile[]
+}
+
+// User と Room 1対多の関係
+model Room {
+  id                 String       @id @default(cuid())
+  name               String
+  ownerId            String
+  discription        String?
+  isNormalActivity   Boolean      @default(false)
+  type               String?
+  target             String?
+  startDateTime      DateTime?
+  endDateTime        DateTime?
+  advanceSettingFile String?
+  attendances        Attendance[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner User @relation(fields: [ownerId], references: [id])
+}
+
+// Room と Attendance 1対多の関係
+// User と Attendance 1対多の関係
+model Attendance {
+  id             String   @id @default(cuid())
+  roomId         String
+  userId         String
+  attendDateTime DateTime @default(now())
+
+  room Room @relation(fields: [roomId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
