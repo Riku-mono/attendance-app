@@ -10,6 +10,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 
 import { ModeToggle } from '@/components/theme-toggle-btn'
 import { NavLinks, MbNavLinks } from '@/components/header/nav-links'
+import { Toaster } from 'sonner'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -55,6 +56,7 @@ export default async function RootLayout({
               {children}
             </main>
             {session ? <MbNavLinks /> : null}
+            <Toaster />
           </ThemeProvider>
         </SessionProvider>
       </body>

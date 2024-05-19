@@ -11,15 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@radix-ui/react-select'
 
 export function ModeToggle() {
   const { setTheme } = useTheme()
@@ -39,31 +30,5 @@ export function ModeToggle() {
         <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
-
-export function ModeSelect() {
-  const { theme, setTheme } = useTheme()
-
-  return (
-    <Select defaultValue={theme}>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a theme" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Theme</SelectLabel>
-          <SelectItem value="light" onClick={() => setTheme('light')}>
-            Light
-          </SelectItem>
-          <SelectItem value="dark" onClick={() => setTheme('dark')}>
-            Dark
-          </SelectItem>
-          <SelectItem value="system" onClick={() => setTheme('system')}>
-            System
-          </SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
   )
 }
