@@ -3,21 +3,6 @@ import type { Provider } from 'next-auth/providers'
 import GitHub from 'next-auth/providers/github'
 import prisma from '@/lib/prisma'
 
-declare module '@auth/core/types' {
-  interface Session {
-    user: {
-      id: string
-      role: string
-      profileInitialed: boolean
-    }
-  }
-
-  interface User {
-    role: string
-    profileInitialed: boolean
-  }
-}
-
 const providers: Provider[] = [
   GitHub({
     authorization: {
@@ -114,9 +99,12 @@ async function checkProfileInitialed(userId: string) {
     where: {
       id: userId,
     },
+    select: {
+      profileInitialed: true,
+    },
   })
   if (user) {
-    return true
+    return user.profileInitialed
   }
   return false
 }
