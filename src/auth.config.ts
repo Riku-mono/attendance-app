@@ -46,15 +46,22 @@ export const authConfig = {
       }
       return true
     },
-    async jwt({ token, user, session, trigger }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         token.id = user.id
         token.role = user.role
         token.profileInitialed = user.profileInitialed
       }
-      if (trigger === 'update' && session) {
-        token = { ...token, user: { ...session.user } }
-        return token
+      if (trigger === 'update') {
+        const dbUser = await prisma.user.findUnique({
+          where: {
+            id: token.id as string,
+          },
+        })
+        if (dbUser) {
+          token.role = dbUser.role
+          token.profileInitialed = dbUser.profileInitialed
+        }
       }
       return token
     },
