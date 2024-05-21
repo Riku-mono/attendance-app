@@ -14,8 +14,13 @@ export default auth((req) => {
   const isPublicRoute = PUBLIC_ROUTES.includes(nextUrl.pathname)
 
   if (isAuthenticated) {
-    if (session?.user.profileInitialed === false && nextUrl.pathname !== '/auth/new-user') {
-      return Response.redirect(new URL('/auth/new-user', nextUrl))
+    if (session?.user.profileInitialed === false) {
+      if (nextUrl.pathname === '/auth/logout') {
+        return
+      }
+      if (nextUrl.pathname !== '/auth/new-user') {
+        return Response.redirect(new URL('/auth/new-user', nextUrl))
+      }
     }
     if (session?.user.profileInitialed === true && nextUrl.pathname === '/auth/new-user') {
       return Response.redirect(new URL(DEFAULT_REDIRECT, nextUrl))
@@ -27,5 +32,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|favicon.ico).*)'],
 }
