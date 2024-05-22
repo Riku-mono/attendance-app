@@ -12,14 +12,14 @@ const providers: Provider[] = [
     },
     async profile(profile) {
       const role = await getRole(profile.id.toString())
-      const profileInitialed = await checkProfileInitialed(profile.id.toString())
+      const profileInitialized = await checkprofileInitialized(profile.id.toString())
       return {
         id: profile.id.toString(),
         name: profile.login,
         email: profile.email ?? null,
         image: profile.avatar_url,
         role: role,
-        profileInitialed: profileInitialed,
+        profileInitialized: profileInitialized,
       }
     },
   }),
@@ -50,7 +50,7 @@ export const authConfig = {
       if (user) {
         token.id = user.id
         token.role = user.role
-        token.profileInitialed = user.profileInitialed
+        token.profileInitialized = user.profileInitialized
       }
       if (trigger === 'update') {
         const dbUser = await prisma.user.findUnique({
@@ -60,7 +60,7 @@ export const authConfig = {
         })
         if (dbUser) {
           token.role = dbUser.role
-          token.profileInitialed = dbUser.profileInitialed
+          token.profileInitialized = dbUser.profileInitialized
         }
       }
       return token
@@ -69,7 +69,7 @@ export const authConfig = {
       if (token) {
         session.user.id = token.id as string
         session.user.role = token.role as string
-        session.user.profileInitialed = token.profileInitialed as boolean
+        session.user.profileInitialized = token.profileInitialized as boolean
       }
       return session
     },
@@ -101,17 +101,17 @@ async function getRole(userId: string) {
   return 'USER'
 }
 
-async function checkProfileInitialed(userId: string) {
+async function checkprofileInitialized(userId: string) {
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
     select: {
-      profileInitialed: true,
+      profileInitialized: true,
     },
   })
   if (user) {
-    return user.profileInitialed
+    return user.profileInitialized
   }
   return false
 }

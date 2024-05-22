@@ -14,21 +14,26 @@ datasource db {
 }
  
 model User {
-  id               String       @id @default(cuid())
-  name             String?
-  email            String       @unique
-  emailVerified    DateTime?
-  image            String?
-  role             String       @default("USER")
-  profileInitialed Boolean?     @default(false)
-  profile          Profile?
-  rooms            Room[]
-  attendances      Attendance[]
-  accounts         Account[]
-  sessions         Session[]
+  id                String       @id @default(cuid())
+  name              String?
+  email             String       @unique
+  emailVerified     DateTime?
+  image             String?
+  role              UserRole     @default(USER)
+  profileInitialized Boolean?    @default(false)
+  profile           Profile?
+  activities        Activity[]
+  attendances       Attendance[]
+  accounts          Account[]
+  sessions          Session[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  USER
 }
 
 model Account {
@@ -74,56 +79,68 @@ model VerificationToken {
 // 以下はアプリケーションのスキーマ
 // User と Profile 1対1の関係
 model Profile {
-  id        String  @id @default(cuid())
-  userId    String  @unique
-  firstName String?
-  lastName  String?
-  campusId  Int?
-  language  String?
+  id                String  @id @default(cuid())
+  userId            String  @unique
+  firstName         String?
+  lastName          String?
+  campusId          Int?
+  language          String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
   
-  campus Campus? @relation(fields: [campusId], references: [id])
-  user   User    @relation(fields: [userId], references: [id])
+  campus            Campus? @relation(fields: [campusId], references: [id])
+  user              User    @relation(fields: [userId], references: [id])
 }
 
 // Profile と Campus 多対1の関係
+// Activity と Campus 多対多の関係
 model Campus {
-  id       Int   @id @default(autoincrement())
-  name     String @unique
-  color    String
-  profiles Profile[]
+  id                Int     @id @default(autoincrement())
+  name              String  @unique
+  color             String
+  profiles          Profile[]
+  activities        Activity[]
 }
 
-// User と Room 1対多の関係
-model Room {
-  id                 String       @id @default(cuid())
-  name               String
-  ownerId            String
-  discription        String?
-  isNormalActivity   Boolean      @default(false)
-  type               String?
-  target             String?
-  startDateTime      DateTime?
-  endDateTime        DateTime?
-  advanceSettingFile String?
-  attendances        Attendance[]
+// User と Activity 1対多の関係
+// Place と Activity 1対多の関係
+// Campus と Activity 多対多の関係
+model Activity {
+  id                String       @id @default(cuid())
+  name              String
+  ownerId           String
+  description       String?
+  isNormalActivity  Boolean      @default(false)
+  activityType      String?
+  placeId           Int?
+  startDateTime     DateTime?
+  endDateTime       DateTime?
+  attendances       Attendance[]
+  targets           Campus[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-  owner User @relation(fields: [ownerId], references: [id])
+  owner             User   @relation(fields: [ownerId], references: [id])
+  place             Place? @relation(fields: [placeId], references: [id])
 }
 
-// Room と Attendance 1対多の関係
+
+// Activity と Attendance 1対多の関係
 // User と Attendance 1対多の関係
 model Attendance {
-  id             String   @id @default(cuid())
-  roomId         String
-  userId         String
-  attendDateTime DateTime @default(now())
+  id                String   @id @default(cuid())
+  activityId        String
+  userId            String
+  attendDateTime    DateTime @default(now())
 
-  room Room @relation(fields: [roomId], references: [id])
-  user User @relation(fields: [userId], references: [id])
+  activity          Activity @relation(fields: [activityId], references: [id])
+  user              User     @relation(fields: [userId], references: [id])
+}
+
+model Place {
+  id                Int      @id @default(autoincrement())
+  name              String
+  activities        Activity[]
 }

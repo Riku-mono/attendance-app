@@ -24,7 +24,7 @@ export const newUserSettings = async (values: z.infer<typeof NewUserSettingsSche
       id: session.user.id,
     },
     data: {
-      profileInitialed: true,
+      profileInitialized: true,
       profile: {
         upsert: {
           update: {

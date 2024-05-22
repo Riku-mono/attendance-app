@@ -14,7 +14,7 @@ export default auth((req) => {
   const isPublicRoute = PUBLIC_ROUTES.includes(nextUrl.pathname)
 
   if (isAuthenticated) {
-    if (session?.user.profileInitialed === false) {
+    if (session?.user.profileInitialized === false) {
       if (nextUrl.pathname === '/auth/logout') {
         return
       }
@@ -22,7 +22,7 @@ export default auth((req) => {
         return Response.redirect(new URL('/auth/new-user', nextUrl))
       }
     }
-    if (session?.user.profileInitialed === true && nextUrl.pathname === '/auth/new-user') {
+    if (session?.user.profileInitialized === true && nextUrl.pathname === '/auth/new-user') {
       return Response.redirect(new URL(DEFAULT_REDIRECT, nextUrl))
     }
     if (isPublicRoute) return Response.redirect(new URL(DEFAULT_REDIRECT, nextUrl))

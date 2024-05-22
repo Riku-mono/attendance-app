@@ -45,17 +45,17 @@ export default async function RootLayout({
           >
             <header className="sticky top-0 z-50 flex h-16 items-center gap-4 bg-muted/40 px-4 md:border-b md:bg-background md:px-6">
               <div className="container flex h-14 max-w-screen-2xl items-center p-0">
-                {session?.user.profileInitialed ? <NavLinks /> : null}
+                {session?.user.profileInitialized ? <NavLinks /> : null}
                 <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
                   <div></div>
                   <ModeToggle />
                 </div>
               </div>
             </header>
-            <main className="relative flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 overflow-x-hidden bg-muted/40 p-4 md:gap-8 md:p-10">
+            <main className="relative flex min-h-[calc(100vh_-_theme(spacing.32))] flex-1 flex-col gap-4 overflow-x-hidden bg-muted/40 p-4 md:min-h-[calc(100vh_-_theme(spacing.16))] md:gap-8 md:p-10">
               {children}
             </main>
-            {session?.user.profileInitialed ? <MbNavLinks /> : null}
+            {session?.user.profileInitialized ? <MbNavLinks /> : null}
             <Toaster />
           </ThemeProvider>
         </SessionProvider>

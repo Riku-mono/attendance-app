@@ -7,6 +7,6 @@ declare module 'next-auth' {
 
   interface User {
     role: String | null
-    profileInitialed: Boolean | null
+    profileInitialized: Boolean | null
   }
 }

@@ -76,14 +76,14 @@ export function ProfileForm({ campus }: { campus: Campus[] }) {
             toast.error(data.error)
             setError(data.error)
             update({
-              profileInitialed: false,
+              profileInitialized: false,
             })
           }
           if (data.success) {
             toast.success(data.success)
             setSuccess(data.success)
             update({
-              profileInitialed: true,
+              profileInitialized: true,
             }).then(() => {
               router.push('/settings')
             })
