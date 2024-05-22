@@ -21,6 +21,7 @@ model User {
   image             String?
   role              UserRole     @default(USER)
   profileInitialized Boolean?    @default(false)
+  campusId          Int?
   profile           Profile?
   activities        Activity[]
   attendances       Attendance[]
@@ -29,6 +30,8 @@ model User {
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+
+  campus            Campus? @relation(fields: [campusId], references: [id])
 }
 
 enum UserRole {
@@ -40,7 +43,7 @@ model Account {
   userId            String
   type              String
   provider          String
-  providerAccountId String
+  providerAccountId String   @unique
   refresh_token     String?
   access_token      String?
   expires_at        Int?
@@ -83,13 +86,11 @@ model Profile {
   userId            String  @unique
   firstName         String?
   lastName          String?
-  campusId          Int?
   language          String?
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   
-  campus            Campus? @relation(fields: [campusId], references: [id])
   user              User    @relation(fields: [userId], references: [id])
 }
 
@@ -99,7 +100,7 @@ model Campus {
   id                Int     @id @default(autoincrement())
   name              String  @unique
   color             String
-  profiles          Profile[]
+  users             User[]
   activities        Activity[]
 }
 

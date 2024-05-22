@@ -11,8 +11,22 @@ const providers: Provider[] = [
       },
     },
     async profile(profile) {
-      const role = await getRole(profile.id.toString())
-      const profileInitialized = await checkprofileInitialized(profile.id.toString())
+      const userId = await getUserId(profile.id.toString())
+      const user = await getUser(userId as string)
+      if (!user) {
+        return {
+          id: profile.id.toString(),
+          name: profile.login,
+          email: profile.email ?? null,
+          image: profile.avatar_url,
+          role: 'USER',
+          profileInitialized: false,
+          campusId: null,
+        }
+      }
+      const role = user.role
+      const profileInitialized = user.profileInitialized
+      const campusId = user.campusId
       return {
         id: profile.id.toString(),
         name: profile.login,
@@ -20,7 +34,7 @@ const providers: Provider[] = [
         image: profile.avatar_url,
         role: role,
         profileInitialized: profileInitialized,
-        campusId: null,
+        campusId: campusId,
       }
     },
   }),
@@ -60,20 +74,10 @@ export const authConfig = {
             id: token.id as string,
           },
         })
-        const dbUserCampus = await prisma.profile.findUnique({
-          where: {
-            userId: token.id as string,
-          },
-          select: {
-            campusId: true,
-          },
-        })
         if (dbUser) {
           token.role = dbUser.role
           token.profileInitialized = dbUser.profileInitialized
-        }
-        if (dbUserCampus) {
-          token.campusId = dbUserCampus.campusId
+          token.campusId = dbUser.campusId
         }
       }
       return token
@@ -103,29 +107,31 @@ async function getGitHubUserOrgs(accessToken: string) {
   return response.json()
 }
 
-async function getRole(userId: string) {
-  const user = await prisma.user.findUnique({
+async function getUserId(githubId: string) {
+  const user = await prisma.account.findUnique({
     where: {
-      id: userId,
+      providerAccountId: githubId,
     },
   })
   if (user) {
-    return user.role
+    return user.userId
   }
-  return 'USER'
+  return null
 }
 
-async function checkprofileInitialized(userId: string) {
+async function getUser(userId: string) {
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
     select: {
+      role: true,
       profileInitialized: true,
+      campusId: true,
     },
   })
   if (user) {
-    return user.profileInitialized
+    return user
   }
-  return false
+  return null
 }

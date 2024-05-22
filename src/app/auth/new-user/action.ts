@@ -25,25 +25,20 @@ export const newUserSettings = async (values: z.infer<typeof NewUserSettingsSche
     },
     data: {
       profileInitialized: true,
+      campus: {
+        connect: {
+          id: Number(values.campusId),
+        },
+      },
       profile: {
         upsert: {
           update: {
             firstName: values.firstName,
             lastName: values.lastName,
-            campus: {
-              connect: {
-                id: Number(values.campusId),
-              },
-            },
           },
           create: {
             firstName: values.firstName,
             lastName: values.lastName,
-            campus: {
-              connect: {
-                id: Number(values.campusId),
-              },
-            },
           },
         },
       },
