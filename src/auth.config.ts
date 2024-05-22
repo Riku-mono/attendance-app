@@ -20,6 +20,7 @@ const providers: Provider[] = [
         image: profile.avatar_url,
         role: role,
         profileInitialized: profileInitialized,
+        campusId: null,
       }
     },
   }),
@@ -51,6 +52,7 @@ export const authConfig = {
         token.id = user.id
         token.role = user.role
         token.profileInitialized = user.profileInitialized
+        token.campusId = user.campusId
       }
       if (trigger === 'update') {
         const dbUser = await prisma.user.findUnique({
@@ -58,9 +60,20 @@ export const authConfig = {
             id: token.id as string,
           },
         })
+        const dbUserCampus = await prisma.profile.findUnique({
+          where: {
+            userId: token.id as string,
+          },
+          select: {
+            campusId: true,
+          },
+        })
         if (dbUser) {
           token.role = dbUser.role
           token.profileInitialized = dbUser.profileInitialized
+        }
+        if (dbUserCampus) {
+          token.campusId = dbUserCampus.campusId
         }
       }
       return token
@@ -70,6 +83,7 @@ export const authConfig = {
         session.user.id = token.id as string
         session.user.role = token.role as string
         session.user.profileInitialized = token.profileInitialized as boolean
+        session.user.campusId = token.campusId as number
       }
       return session
     },

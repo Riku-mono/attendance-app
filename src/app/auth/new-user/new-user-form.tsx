@@ -77,6 +77,7 @@ export function ProfileForm({ campus }: { campus: Campus[] }) {
             setError(data.error)
             update({
               profileInitialized: false,
+              campusId: null,
             })
           }
           if (data.success) {
@@ -84,6 +85,7 @@ export function ProfileForm({ campus }: { campus: Campus[] }) {
             setSuccess(data.success)
             update({
               profileInitialized: true,
+              campusId: parseInt(values.campusId),
             }).then(() => {
               router.push('/settings')
             })
