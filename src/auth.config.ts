@@ -12,21 +12,12 @@ const providers: Provider[] = [
     },
     async profile(profile) {
       const userId = await getUserId(profile.id.toString())
-      const user = await getUser(userId as string)
-      if (!user) {
-        return {
-          id: profile.id.toString(),
-          name: profile.login,
-          email: profile.email ?? null,
-          image: profile.avatar_url,
-          role: 'USER',
-          profileInitialized: false,
-          campusId: null,
-        }
-      }
-      const role = user.role
-      const profileInitialized = user.profileInitialized
-      const campusId = user.campusId
+      const user = userId ? await getUser(userId as string) : null
+
+      const role = user?.role || 'USER'
+      const profileInitialized = user?.profileInitialized || false
+      const campusId = user?.campusId || null
+
       return {
         id: profile.id.toString(),
         name: profile.login,
