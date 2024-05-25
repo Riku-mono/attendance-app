@@ -5,7 +5,7 @@ import RecentAttendance from '@/components/home/recent-attendance'
 import RecentOwnedActivities from '@/components/home/recent-owned-activities'
 import { getNextActivities, getRecentAttendance, getRecentOwnedActivities } from './action'
 
-import { ArrowUpRight, PlusCircleIcon, QrCodeIcon } from 'lucide-react'
+import { ArrowUpRight, PlusCircleIcon, ScanLineIcon } from 'lucide-react'
 import {
   Card,
   CardContent,
@@ -35,9 +35,9 @@ export default async function home() {
               <h3 className="font-semibold">Quick Actions</h3>
             </CardHeader>
             <CardContent className="grid gap-4 sm:grid-cols-2">
-              <Button>
+              <Button asChild>
                 <Link href="/qr-reader" className="flex">
-                  <QrCodeIcon className="mr-2 h-5 w-5" />
+                  <ScanLineIcon className="mr-2 h-5 w-5" />
                   Scan QR Code
                 </Link>
               </Button>

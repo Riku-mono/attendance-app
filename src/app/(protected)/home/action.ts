@@ -58,6 +58,7 @@ export async function getRecentAttendance({ userId }: { userId: string }) {
       attendDateTime: true,
       activity: {
         select: {
+          id: true,
           name: true,
           place: {
             select: {
