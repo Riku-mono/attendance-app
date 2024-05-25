@@ -4,7 +4,7 @@ import { signOut } from '@/auth'
 
 export default function LogoutPage() {
   return (
-    <div className="relative mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 lg:grid-cols-2">
+    <div className="relative mx-auto grid w-full max-w-7xl flex-1 grid-cols-1">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
@@ -23,7 +23,7 @@ export default function LogoutPage() {
                 Sign out
               </Button>
             </form>
-            <Button variant="outline">
+            <Button asChild variant="outline">
               <Link href="/">Cancel</Link>
             </Button>
           </div>
