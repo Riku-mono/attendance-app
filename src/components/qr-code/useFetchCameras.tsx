@@ -1,3 +1,5 @@
+'use client'
+
 import { Html5Qrcode, CameraDevice } from 'html5-qrcode'
 import {} from 'html5-qrcode'
 import { useCallback, useState } from 'react'

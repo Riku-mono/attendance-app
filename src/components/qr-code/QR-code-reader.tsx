@@ -15,11 +15,22 @@ import { toast } from 'sonner'
 
 interface IInfoProps {
   title: string
+  subtitle?: string
+  link?: {
+    href: string
+    label: string
+  }
 }
 
-export const Info: React.FC<IInfoProps> = ({ title }: IInfoProps) => (
+export const Info: React.FC<IInfoProps> = ({ title, subtitle, link }: IInfoProps) => (
   <div className="flex h-full w-full flex-col items-center justify-center gap-2">
     <h6>{title}</h6>
+    {subtitle && <p>{subtitle}</p>}
+    {link && (
+      <Link href={link.href} className="text-blue-500 underline">
+        {link.label}
+      </Link>
+    )}
   </div>
 )
 
@@ -64,10 +75,19 @@ export function QRCodeReader() {
     return <Info title="Detecting available cameras" />
   }
   if (error) {
-    return <Info title="Failed to detect cameras" />
+    return (
+      <Info
+        title="Failed to detect cameras"
+        subtitle="Please check the camera access permissions."
+        link={{
+          href: '/docs/scan-qr-code#camera-access-permission',
+          label: 'Help with Scan QR codes',
+        }}
+      />
+    )
   }
   if (cameraDevices.length === 0) {
-    return <Info title="No available cameras" />
+    return <Info title="No available cameras" subtitle="No cameras were found on this device." />
   }
   return (
     <div className="flex flex-col gap-2">

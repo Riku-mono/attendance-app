@@ -1,3 +1,5 @@
+'use client'
+
 import { Html5Qrcode, Html5QrcodeScannerState } from 'html5-qrcode'
 import React, { forwardRef, useCallback, useEffect, useRef } from 'react'
 import { Html5QrcodeScannerConfig } from './types'
