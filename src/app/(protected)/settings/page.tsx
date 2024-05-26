@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { NameSettingForm, userName } from './name-setting-form'
 import { CampusSettingForm } from './campus-setting-form'
+import UserProfileCard from './profile-card'
 
 export default async function SettingsGeneralPage() {
   const session = await auth()
@@ -34,6 +35,7 @@ export default async function SettingsGeneralPage() {
 
   return (
     <>
+      <UserProfileCard user={session.user} />
       <NameSettingForm userName={userName} />
       <CampusSettingForm defaultCampusId={campusId} campusList={campus} />
     </>
