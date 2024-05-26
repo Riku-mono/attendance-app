@@ -62,7 +62,8 @@ export default async function AttendPage({ params }: { params: { id: string } })
           <div className="w-128 mx-auto grid gap-6">
             <div>
               <h1 className="text-center text-4xl font-bold">Attend successfully!</h1>
-              <div className="text-center">Thank you for your participation!</div>
+              <p className="text-center text-lg text-muted-foreground">or</p>
+              <h1 className="text-center text-4xl font-bold">Already attended this activity!</h1>
             </div>
             <div className="grid gap-2">
               <Button asChild variant="outline">
