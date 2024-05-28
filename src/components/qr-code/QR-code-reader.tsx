@@ -33,10 +33,19 @@ export const Info: React.FC<IInfoProps> = ({ title, subtitle, link }: IInfoProps
     )}
   </div>
 )
+let qrboxFunction = function (viewfinderWidth: number, viewfinderHeight: number) {
+  let minEdgePercentage = 0.8 // 80%
+  let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight)
+  let qrboxSize = Math.floor(minEdgeSize * minEdgePercentage)
+  return {
+    width: qrboxSize,
+    height: qrboxSize,
+  }
+}
 
 const CONFIG = {
   fps: 1,
-  qrbox: { width: 256, height: 256 },
+  qrbox: qrboxFunction,
   aspectRatio: 1.0,
   formatsToSupport: [Html5QrcodeSupportedFormats.CODE_128, Html5QrcodeSupportedFormats.QR_CODE],
   rememberLastUsedCamera: true,
@@ -67,7 +76,8 @@ export function QRCodeReader() {
     [baseUrl, router]
   )
   useEffect(() => {
-    fetchCameras()
+    fetchCameras() // only once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const ref = useRef<IHtmlQrcodePluginForwardedRef>(null)
   const [selectedCameraId, setSelectedCameraId] = useState<string | undefined>(undefined)
