@@ -39,7 +39,7 @@ export default async function AttendURLPage({ params }: { params: { id: string }
 
   const isUserAttended = await getUserAttended(user.id as string, id)
   if (isUserAttended) {
-    return <AlreadyAttended />
+    return <AlreadyAttended sequence={isUserAttended.sequenceByActivity} />
   }
 
   return <AttendPage activity={activity as Activity} user={user} />

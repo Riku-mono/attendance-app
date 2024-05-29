@@ -19,12 +19,24 @@ export const attendActivity = async (values: z.infer<typeof AttendActivitySchema
     return { error: 'Unauthorized' }
   }
 
-  await prisma.attendance.create({
-    data: {
-      userId: values.userId,
-      activityId: values.activityId,
-    },
-  })
+  try {
+    await prisma.$transaction(async (prisma) => {
+      const count = await prisma.attendance.count({
+        where: {
+          activityId: values.activityId,
+        },
+      })
 
-  return { success: 'Attended activity successfully!' }
+      const newAttendance = await prisma.attendance.create({
+        data: {
+          userId: values.userId,
+          activityId: values.activityId,
+          sequenceByActivity: count + 1,
+        },
+      })
+    })
+    return { success: 'Attended activity successfully!' }
+  } catch (error) {
+    return { error: 'Failed to attend activity' }
+  }
 }

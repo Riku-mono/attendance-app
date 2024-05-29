@@ -140,6 +140,7 @@ model Attendance {
   activityId        String
   userId            String
   attendDateTime    DateTime @default(now())
+  sequenceByActivity Int     @default(1)
 
   activity          Activity @relation(fields: [activityId], references: [id])
   user              User     @relation(fields: [userId], references: [id])

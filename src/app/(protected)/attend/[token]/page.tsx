@@ -32,8 +32,9 @@ export default async function AttendQRCodePage({ params }: { params: { token: st
   }
 
   const isUserAttended = await getUserAttended(user.id as string, activityId)
+  console.log(isUserAttended)
   if (isUserAttended) {
-    return <AlreadyAttended />
+    return <AlreadyAttended sequence={isUserAttended.sequenceByActivity} />
   }
 
   return <AttendPage activity={activity as Activity} user={user} />

@@ -6,6 +6,9 @@ export default async function getUserAttended(userId: string, activityId: string
       userId,
       activityId,
     },
+    select: {
+      sequenceByActivity: true,
+    },
   })
   return res
 }
