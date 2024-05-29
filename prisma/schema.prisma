@@ -107,16 +107,21 @@ model Campus {
 // User と Activity 1対多の関係
 // Place と Activity 1対多の関係
 // Campus と Activity 多対多の関係
+enum ActivityType {
+  OFFLINE
+  ONLINE
+}
+
 model Activity {
   id                String       @id @default(cuid())
   name              String
   ownerId           String
   description       String?
   isNormalActivity  Boolean      @default(false)
-  activityType      String?
-  placeId           Int?
-  startDateTime     DateTime?
-  endDateTime       DateTime?
+  activityType      ActivityType @default(OFFLINE)
+  placeId           Int
+  startDateTime     DateTime
+  endDateTime       DateTime
   attendances       Attendance[]
   targets           Campus[]
 

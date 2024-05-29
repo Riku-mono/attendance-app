@@ -14,7 +14,7 @@ export default async function AttendURLPage({ params }: { params: { id: string }
     return notFound()
   }
 
-  if (activity.activityType !== 'online') {
+  if (activity.activityType !== 'ONLINE') {
     return <ErrorPage>This activity does not allow attendance by this method.</ErrorPage>
   }
 

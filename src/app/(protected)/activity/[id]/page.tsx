@@ -147,7 +147,7 @@ export default async function ActivityDetailPage({ params }: { params: { id: str
           </div>
           {isOwner && (
             <div className="flex flex-wrap gap-2">
-              {isAvailable && activity.activityType === 'offline' && (
+              {isAvailable && activity.activityType === 'OFFLINE' && (
                 <Button asChild variant="outline" className="gap-2" size="sm">
                   <Link href={`/activity/${activity.id}/qr-code`}>
                     <QrCodeIcon className="h-4 w-4" />
@@ -157,7 +157,7 @@ export default async function ActivityDetailPage({ params }: { params: { id: str
                   </Link>
                 </Button>
               )}
-              {isAvailable && activity.activityType === 'online' && (
+              {isAvailable && activity.activityType === 'ONLINE' && (
                 <AttendLinkDialog activityId={activity.id} />
               )}
               <Button asChild className="gap-2" size="sm">
