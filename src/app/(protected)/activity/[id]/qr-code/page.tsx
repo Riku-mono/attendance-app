@@ -61,7 +61,7 @@ export default async function QRCodeGeneratePage({ params }: { params: { id: str
       </header>
       <section className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center gap-4">
         <p className="text-center text-sm">Scan the QR code below to attend to the activity.</p>
-        <Generator content={params.id} activityId={params.id} />
+        <Generator content={token} activityId={params.id} />
       </section>
     </>
   )

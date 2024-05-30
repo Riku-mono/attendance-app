@@ -69,7 +69,7 @@ export default function Generator({
         fgColor={'#000'}
         level={'L'}
         includeMargin={true}
-        className="max-w-full object-contain"
+        className="max-w-full rounded-md object-contain"
       />
       <div className="text-center text-sm" style={{ wordBreak: 'break-all' }}>
         {token}

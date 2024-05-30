@@ -1,6 +1,6 @@
 // 入力値に対して、トークンを生成し、トークンをキーとして、値をキャッシュし、トークンを返す
 
-import tokenCache from '@/lib/cache'
+import cacheService from '@/lib/cache'
 
 export async function createToken(): Promise<string> {
   const token = Math.random().toString(36).substring(2)
@@ -8,21 +8,17 @@ export async function createToken(): Promise<string> {
 }
 
 export async function getValue(token: string): Promise<string> {
-  return tokenCache.get(token) || ''
+  return cacheService.get(token) || ''
 }
 
 export async function setToken(token: string, activityId: string): Promise<boolean> {
-  return tokenCache.set(token, activityId, 30)
+  return cacheService.set(token, activityId, 35)
 }
 
 export async function getAllTokens(): Promise<string[]> {
-  return tokenCache.keys()
-}
-
-export async function allCacheDrop(): Promise<void> {
-  tokenCache.flushAll()
+  return cacheService.getKeys()
 }
 
 export async function checkToken(token: string): Promise<boolean> {
-  return tokenCache.has(token)
+  return cacheService.has(token)
 }
