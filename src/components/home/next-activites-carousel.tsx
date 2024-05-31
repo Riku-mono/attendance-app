@@ -11,9 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 export type Activity = {
   id: string
   name: string
-  place: {
-    name: string
-  }
+  place: string
   activityType: string
   startDateTime: Date
   endDateTime: Date
@@ -65,7 +63,7 @@ export default function NextActivitiesCarousel({ activities }: { activities: Act
                   <CardContent>
                     <div className="flex flex-wrap items-center gap-1 text-sm font-medium text-muted-foreground">
                       <MapPinIcon className="h-4 w-4" />
-                      <span>{activity.place?.name}</span>
+                      <span>{activity.place}</span>
                       <span>|</span>
                       <span>
                         {activity.startDateTime?.toLocaleDateString()}{' '}

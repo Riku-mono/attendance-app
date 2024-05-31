@@ -18,9 +18,7 @@ export default async function getActivity(id: string) {
       targets: {
         select: { id: true, name: true, color: true },
       },
-      place: {
-        select: { id: true, name: true },
-      },
+      place: true,
       startDateTime: true,
       endDateTime: true,
     },

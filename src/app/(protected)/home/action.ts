@@ -27,11 +27,7 @@ export async function getNextActivities({ userCampusId }: { userCampusId: number
     select: {
       id: true,
       name: true,
-      place: {
-        select: {
-          name: true,
-        },
-      },
+      place: true,
       activityType: true,
       startDateTime: true,
       endDateTime: true,
@@ -60,11 +56,7 @@ export async function getRecentAttendance({ userId }: { userId: string }) {
         select: {
           id: true,
           name: true,
-          place: {
-            select: {
-              name: true,
-            },
-          },
+          place: true,
           owner: {
             select: {
               profile: {
@@ -98,11 +90,7 @@ export async function getRecentOwnedActivities({ userId }: { userId: string }) {
     select: {
       id: true,
       name: true,
-      place: {
-        select: {
-          name: true,
-        },
-      },
+      place: true,
       activityType: true,
       startDateTime: true,
       endDateTime: true,

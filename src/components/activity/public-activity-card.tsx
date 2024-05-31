@@ -107,7 +107,7 @@ export default async function PublicActivityCard({ id }: { id: string }) {
           </div>
           <div>
             <p className="mb-1 text-sm text-muted-foreground">Location</p>
-            <p className="rounded-md border p-2">{activity.place?.name}</p>
+            <p className="rounded-md border p-2">{activity.place}</p>
           </div>
           <div>
             <p className="mb-1 text-sm text-muted-foreground">Created At</p>

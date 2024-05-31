@@ -5,10 +5,9 @@ export type Attendance = {
   id: string
   attendDateTime: Date
   activity: {
+    id: string
     name: string
-    place: {
-      name: string
-    }
+    place: string
     owner: {
       profile: {
         firstName: string
@@ -31,13 +30,13 @@ export default function RecentAttendance({ attendance }: { attendance: Attendanc
           href={`/attendance/${a.id}`}
         >
           <div className="flex flex-1 flex-col gap-2">
-            <div className="font-semibold">{a.attendDateTime.toLocaleDateString()}</div>
-            <div className="flex gap-1 text-xs text-muted-foreground">
+            <div className="font-semibold">{a.attendDateTime.toLocaleString()}</div>
+            <div className="flex flex-wrap gap-1 text-xs text-muted-foreground">
               <span>{a.activity.name}</span>
               <span>|</span>
               <span className="flex items-center gap-1">
                 <MapPinIcon className="h-4 w-4" />
-                {a.activity.place.name}
+                {a.activity.place}
               </span>
               <span>|</span>
               <span className="flex items-center gap-1">

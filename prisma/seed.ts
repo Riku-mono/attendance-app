@@ -10,16 +10,6 @@ async function main() {
     ],
   })
   console.log({ campus })
-  const place = await prisma.place.createMany({
-    data: [
-      { name: '5-201' },
-      { name: '5-202' },
-      { name: '5-203' },
-      { name: '5-204' },
-      { name: 'conference room' },
-    ],
-  })
-  console.log({ place })
 }
 main()
   .then(async () => {

@@ -105,7 +105,6 @@ model Campus {
 }
 
 // User と Activity 1対多の関係
-// Place と Activity 1対多の関係
 // Campus と Activity 多対多の関係
 enum ActivityType {
   OFFLINE
@@ -119,7 +118,7 @@ model Activity {
   description       String?
   isNormalActivity  Boolean      @default(false)
   activityType      ActivityType @default(OFFLINE)
-  placeId           Int
+  place             String?
   startDateTime     DateTime
   endDateTime       DateTime
   attendances       Attendance[]
@@ -129,7 +128,6 @@ model Activity {
   updatedAt         DateTime @updatedAt
 
   owner             User   @relation(fields: [ownerId], references: [id])
-  place             Place? @relation(fields: [placeId], references: [id])
 }
 
 
@@ -144,10 +142,4 @@ model Attendance {
 
   activity          Activity @relation(fields: [activityId], references: [id])
   user              User     @relation(fields: [userId], references: [id])
-}
-
-model Place {
-  id                Int      @id @default(autoincrement())
-  name              String
-  activities        Activity[]
 }

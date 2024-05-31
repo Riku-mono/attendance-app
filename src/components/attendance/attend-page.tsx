@@ -28,10 +28,7 @@ export type Activity = {
   }
   activityType: string
   targets: Target[]
-  place: {
-    id: number
-    name: string
-  }
+  place: string
   startDateTime: Date
   endDateTime: Date
 }
@@ -84,7 +81,7 @@ export default async function AttendPage({ activity, user }: AttendPageProps) {
                 </div>
                 <div>
                   <p className="mb-1 text-sm text-muted-foreground">Location</p>
-                  <p className="rounded-md border p-2">{activity.place?.name}</p>
+                  <p className="rounded-md border p-2">{activity.place}</p>
                 </div>
               </div>
             </CardContent>

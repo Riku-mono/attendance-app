@@ -7,9 +7,7 @@ export type Activity = {
   id: string
   name: string
   activityType: string
-  place: {
-    name: string
-  }
+  place: string
   startDateTime: Date
   endDateTime: Date
 }
@@ -40,7 +38,7 @@ export default function RecentOwnedActivities({ activities }: { activities: Acti
           </div>
           <div className="flex items-center gap-1 text-sm font-medium">
             <MapPinIcon className="h-4 w-4" />
-            {activity.place?.name}
+            {activity.place}
           </div>
           <div className="flex flex-wrap items-center gap-1 text-xs font-medium text-muted-foreground">
             <span>

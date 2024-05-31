@@ -24,9 +24,7 @@ export async function getActivity(id: string) {
         select: { id: true, name: true, color: true },
       },
       activityType: true,
-      place: {
-        select: { id: true, name: true },
-      },
+      place: true,
       startDateTime: true,
       endDateTime: true,
       createdAt: true,
