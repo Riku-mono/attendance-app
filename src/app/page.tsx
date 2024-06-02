@@ -15,10 +15,10 @@ export default function Home() {
           Please sign in to continue
         </span>
         <div className="flex w-full items-center justify-center space-x-4 py-4 md:pb-10">
-          <Button>
+          <Button asChild>
             <Link href={'/auth/login'}>Join to App</Link>
           </Button>
-          <Button variant="outline">
+          <Button asChild variant="outline">
             <Link href="https://github.com/Riku-mono/attendance-app" target="_blank" className="">
               GitHub Repository
             </Link>

@@ -29,7 +29,7 @@ export default async function SignInPage() {
               </form>
             ))}
           </div>
-          <Button variant="outline">
+          <Button asChild variant="outline">
             <Link href="/">Cancel</Link>
           </Button>
           <div className="mt-4 text-center text-sm">

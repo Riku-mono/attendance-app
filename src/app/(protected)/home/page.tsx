@@ -41,7 +41,7 @@ export default async function home() {
                   Scan QR Code
                 </Link>
               </Button>
-              <Button variant="outline">
+              <Button asChild variant="outline">
                 <Link href="/activity/create" className="flex">
                   <PlusCircleIcon className="mr-2 h-5 w-5" />
                   Create Activity

@@ -18,7 +18,7 @@ export default function RecentOwnedActivities({ activities }: { activities: Acti
       {activities.length === 0 && (
         <div className="flex flex-col gap-4">
           <p className="w-full text-center text-muted-foreground">No activity records found.</p>
-          <Button variant="outline" className="mx-auto">
+          <Button asChild variant="outline" className="mx-auto">
             <Link href="/activity/create" className="flex">
               <PlusCircleIcon className="mr-2 h-5 w-5" />
               Create activity

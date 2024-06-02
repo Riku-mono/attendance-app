@@ -40,7 +40,7 @@ export default async function NewUserPage() {
             </div>
           </div>
           <br />
-          <Button variant="outline">
+          <Button asChild variant="outline">
             <Link href="/auth/logout" className="btn btn-primary">
               Sign out
             </Link>
