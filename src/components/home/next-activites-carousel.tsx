@@ -45,7 +45,12 @@ export default function NextActivitiesCarousel({ activities }: { activities: Act
               loop: true,
             }}
           >
-            <CarouselContent>
+            <CarouselContent
+              className="grid gap-4"
+              style={{
+                gridTemplateColumns: `repeat(${activities.length}, 100%)`,
+              }}
+            >
               {activities.map((activity, index) => (
                 <CarouselItem key={activity.id}>
                   <CardHeader className="pb-2">
