@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export default async function AlreadyAttended({ sequence }: { sequence: number }) {
-  console.log(sequence)
   return (
     <div className="relative mx-auto grid w-full max-w-7xl flex-1 grid-cols-1">
       <div className="flex items-center justify-center py-12">

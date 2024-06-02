@@ -22,7 +22,6 @@ export const createActivity = async (values: z.infer<typeof ActivityCreateSchema
   if (values.startDateTime && values.endDateTime && values.startDateTime > values.endDateTime) {
     return { error: 'Start date time must be before end date time' }
   }
-  console.log('values', values)
 
   const activity = await prisma.activity.create({
     data: {
@@ -41,7 +40,6 @@ export const createActivity = async (values: z.infer<typeof ActivityCreateSchema
       },
     },
   })
-  console.log('activity', activity)
 
   return { id: activity.id, success: 'Created activity successfully!' }
 }
