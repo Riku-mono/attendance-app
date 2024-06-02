@@ -43,7 +43,7 @@ export default async function PublicActivityCard({ id }: { id: string }) {
           </div>
           <div>
             <p className="mb-1 text-sm text-muted-foreground">Description</p>
-            <p className="rounded-md border p-2">{activity.description}</p>
+            <p className="whitespace-pre-wrap rounded-md border p-2">{activity.description}</p>
           </div>
           <div>
             <p className="mb-1 text-sm text-muted-foreground">Term</p>
