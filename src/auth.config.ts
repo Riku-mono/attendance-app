@@ -46,7 +46,10 @@ export const authConfig = {
     async signIn({ user, account, profile }) {
       const accessToken = account?.access_token as string
       const orgs = await getGitHubUserOrgs(accessToken)
-      const isMember = orgs.some((org: { login: string }) => org.login === process.env.GITHUB_ORG)
+      const isMember =
+        process.env.PUBLIC_GITHUB_ORG === ''
+          ? true
+          : orgs.some((org: { login: string }) => org.login === process.env.PUBLIC_GITHUB_ORG)
       if (!isMember) {
         return false
       }

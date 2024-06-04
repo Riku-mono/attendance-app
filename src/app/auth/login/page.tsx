@@ -33,7 +33,7 @@ export default async function SignInPage() {
             <Link href="/">Cancel</Link>
           </Button>
           <div className="mt-4 text-center text-sm">
-            <p>Only acsess Horizon Members</p>
+            <p>Only acsess {process.env.PUBLIC_GITHUB_ORG} Members</p>
           </div>
         </div>
       </div>

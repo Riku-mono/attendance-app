@@ -18,8 +18,8 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: 'Horizon Attendance App',
-  description: 'is a simple attendance app for Horizon Members',
+  title: `${process.env.PUBLIC_GITHUB_ORG} Attendance App`,
+  description: `is a simple attendance app for ${process.env.PUBLIC_GITHUB_ORG} Members`,
 }
 
 export default async function RootLayout({
