@@ -123,7 +123,7 @@ function CalendarGrid({ state, ...props }: CalendarGridProps) {
         </tr>
       </thead>
       <tbody>
-        {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
+        {Array.from(new Array(weeksInMonth).keys()).map((weekIndex) => (
           <tr className="mt-2 flex w-full" key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex)
@@ -363,7 +363,7 @@ const DateTimePicker = React.forwardRef<
         </PopoverTrigger>
         <PopoverContent ref={contentRef} className="w-full">
           <div {...dialogProps} className="space-y-3">
-            <Calendar {...calendarProps} minDate={new Date()} />
+            <Calendar {...calendarProps} />
             {state.hasTime && <TimeField value={state.timeValue} onChange={state.setTimeValue} />}
           </div>
         </PopoverContent>

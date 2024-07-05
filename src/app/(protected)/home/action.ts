@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import { type Activity as NextActivitiesCarouselProps } from '@/components/home/next-activites-carousel'
-import { type Attendance as RecentAttendance } from '@/components/home/recent-attendance'
-import { type Activity as RecentOwnedActivitiesProps } from '@/components/home/recent-owned-activities'
+import { type AttendanceProps } from '@/components/attendance/attendance-item'
+import { type ActivityProps } from '@/components/activity/activity-item'
 
 export async function getNextActivities({ userCampusId }: { userCampusId: number }) {
   if (!userCampusId) {
@@ -70,7 +70,7 @@ export async function getRecentAttendance({ userId }: { userId: string }) {
         },
       },
     },
-  })) as RecentAttendance[]
+  })) as AttendanceProps[]
   return res
 }
 
@@ -95,6 +95,6 @@ export async function getRecentOwnedActivities({ userId }: { userId: string }) {
       startDateTime: true,
       endDateTime: true,
     },
-  })) as RecentOwnedActivitiesProps[]
+  })) as ActivityProps[]
   return res
 }
