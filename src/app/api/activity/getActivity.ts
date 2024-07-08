@@ -8,6 +8,8 @@ export default async function getActivity(id: string) {
     select: {
       id: true,
       name: true,
+      description: true,
+      isNormalActivity: true,
       owner: {
         select: {
           id: true,
