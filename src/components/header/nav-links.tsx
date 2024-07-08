@@ -54,10 +54,10 @@ export const MbNavLinks = () => {
       <div className="">
         <Link
           className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-foreground p-4"
-          href="/qr-scan"
+          href="/qr-reader"
         >
           <QrCode
-            className={`h-6 w-6 text-primary-foreground ${pathname.includes('/qr-scan') ? 'fill-foreground/30 text-foreground' : ''}`}
+            className={`h-6 w-6 text-primary-foreground ${pathname.includes('qr-reader') ? 'fill-foreground/30 text-foreground' : ''}`}
           />
         </Link>
       </div>

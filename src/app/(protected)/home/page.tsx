@@ -85,7 +85,7 @@ export default async function home() {
           </CardContent>
           <CardFooter>
             <Button asChild className="w-full gap-1" variant="secondary">
-              <Link href="/attendance">
+              <Link href="/activity">
                 View All
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
