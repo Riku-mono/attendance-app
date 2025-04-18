@@ -6,8 +6,9 @@
 
 ![slide](./readme_img/slide.png)
 
-<img src="./readme_img/publish.png" width="200" />
-<img src="./readme_img/scan.png" width="200" />
+| 発行 | 出席 |
+| ---- | ---- |
+| <img src="./readme_img/publish.png" width="200" /> | <img src="./readme_img/scan.png" width="200" /> |
 
 ## シーケンス図
 
